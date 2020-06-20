@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="renderer" content="webkit" />
+    <link href="/SPCPTest/Web/Content/css/index.css?v=202003131133" rel="stylesheet" />
+    <script src="/SPCPTest/Web/Scripts/jquery-2.1.4.min.js"></script>
+    <link href="/SPCPTest/Web/Scripts/layer/theme/default/layer.css" rel="stylesheet" />
+    <script src="/SPCPTest/Web/Scripts/layer/layer.js"></script> 
+    <title>西南交通大学-疫情防控管理平台</title>
+</head>
+<body>
+    
+
+
+<style type="text/css">
+    .PutThing {
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        word-wrap: break-word;
+    }
+
+    @media screen and (max-width: 960px) {
+        body {
+            background-image: url("/SPCPTest/Web/Content/img/Login.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+        .login_bg h1 {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 960px) {
+        .logo {
+              background-image: url("/SPCPTest/Web/Content/img/Login.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+        .logo {
+            display: none;
+        }
+    }
+</style>
+<script src="/SPCPTest/Web/Scripts/validation.js"></script>
+<div>
+    <div class="logo">
+        <img src="/SPCPTest/Web/Content/img/logo.png?dt=20200506" />
+    </div>
+    <div class="login_bg">
+        <h1>
+            <span id="TopicName">疫情防控管理平台-学生登录</span>
+        </h1>
+        <div class="Login_list">
+            <div class="row explain" style="border-bottom: 1px solid #ddd;">
+                <pre id="PutThing" class="PutThing"></pre>
+            </div>
+            <div class="login_table">
+                <form method="post" class="box" id="form1" action="/SPCPTest/Web/Account/IdCardLogin">
+                    <div class="row login">
+                        <div class="th_left">学号：</div>
+                        <div class="th_right">
+                            <input name="txtUid" placeholder="请输入学号" type="text" maxlength="30" id="StudentId" autocomplete="new-password"  class="required validate input-style" Vtype="StuId" />
+                        </div>
+                    </div>
+                    <div class="row login ">
+                        <div class="th_left">姓名：</div>
+                        <div class="th_right">
+                            <input name="txtPwd" type="text" placeholder="请输入姓名" maxlength="30" id="Name" autocomplete="new-password"  class="required validate input-style" />
+                        </div>
+                    </div>
+                    <div class="row login ">
+                        <div class="th_left">身份证：</div>
+                        <div class="th_right">
+                            <input name="txtIdCard" type="text" placeholder="请输入身份证后6位(x小写)" maxlength="6" id="IdCard" autocomplete="new-password"  class="required validate input-style" />
+                        </div>
+                    </div>
+                    <div class="row login  codeset">
+                        <div class="th_left">验证码：</div>
+                        <div class="th_right" style="position: relative">
+                            <input name="codeInput" type="text" id="codeInput" placeholder="请输入验证码" maxlength="4" class="code-input validate required  input-style" vtype="code" />
+                            <div class="code-img" id="code-box">
+                            </div>
+                            <span class="code-icon"></span>
+                        </div>
+                    </div>
+                </form>
+                <div class="row  login login_btn">
+                    <div class="btn_div" style="text-align: center;">
+                        <input type="button" value="登 录" id="Submit" class="save_form" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        options = {
+            Newrule: function (t, vtype, text, value) {
+                var validaresult = true;
+                if (vtype == "StuId") {
+                    var rule = /^[A-Za-z0-9]+$/;
+                    var flag = rule.test(value);
+                    var tip;
+                    if (!flag) {
+                        tip = layer.tips("请输入正确的学号", t, {
+                            tips: [1, '#2E8CFF'],
+                            time: 1000
+                        });
+                        t.val("");
+                        return false;
+                    } else {
+                        layer.close(tip);
+                    }
+                }
+                else if (vtype == "code") {
+                    if ($("#codeInput").val().toLowerCase() != $("#code-box").text().toLowerCase()) {
+                        tip = layer.tips("请输入正确的验证码", t, {
+                            tips: [1, '#2E8CFF'],
+                            time: 1000
+                        });
+                        t.val("");
+                        return false;
+                    } else {
+                        layer.close(tip);
+                    }
+                }
+
+                return validaresult;
+            },
+            callback: function () {
+                    var data = { stuId: $("#StudentId").val(), stuName: $("#Name").val(), stuIdCard: $("#IdCard").val() }
+                    $.ajax({
+                        type: "POST",
+                        datatype: "JSON",
+                        data: data,
+                        url: "/SPCPTest/Web/Account/CheckIdCardUser",
+                        async: false,
+                        success: function (res) {
+                            //1：账号密码完全匹配  2：学号匹配  3：信息完全不匹配
+                            if (res == "1") {
+                                $("#form1").submit();
+                            } else if (res == "2") {
+                                layer.alert('您填写的姓名或身份证信息与学号匹配有误。');
+                            } else {
+                                var index = layer.confirm('您填写的学号尚不在此系统中，若为输入错误，请点击返回重新输入；若确认输入无误，请点击“继续”进行填报！', {
+                                    btn: ['继续', '返回'] //按钮
+                                }, function () {
+                                    $("#form1").submit();
+                                    layer.closeAll();
+                                }, function () {
+                                    layer.closeAll();
+                                });
+                            }
+                        },
+                        error: function (res) {
+                            layer.msg("操作失败，请与管理员联系", { time: 2000, icon: 2 });
+                        }
+                    });
+                    return false;
+            }
+        };
+        $("#form1").validation(options);
+    })
+</script>
+<script type="text/javascript">
+    var u = navigator.userAgent;
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    $(function () {
+        if (isiOS) {
+            $(".codeset").hide();
+            $(".code-input").removeClass("required");
+            $(".code-input").removeClass("validate");
+
+        } else {
+            query.init();
+            $("#code-box").click(function () {
+                query.code();
+            });
+        }
+    })
+    var query = {
+        init: function () {
+            this.code();
+        },
+
+        code: function () {
+            var code = "";
+            var codeLength = 4;
+            var selectChar = [2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "m", "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+            for (i = 0; i < codeLength; i++) {
+                var charIndex = Math.floor(Math.random() * 55);
+                code += selectChar[charIndex];
+            }
+            $("#code-box").text(code);
+        }
+    };
+    function NewCode() {
+        var code = "";
+        var codeLength = 4;
+        var selectChar = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        for (i = 0; i < codeLength; i++) {
+            var charIndex = Math.floor(Math.random() * 62);
+            code += selectChar[charIndex];
+        }
+        $("#code-box").text(code);
+    }
+</script>
+
+</body>
+</html>

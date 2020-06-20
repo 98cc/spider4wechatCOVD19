@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="renderer" content="webkit">
+    <link href="/SPCPTest/Web/Content/css/index.css?v=202003131133" rel="stylesheet">
+    <script src="/SPCPTest/Web/Scripts/jquery-2.1.4.min.js"></script>
+    <link href="/SPCPTest/Web/Scripts/layer/theme/default/layer.css" rel="stylesheet">
+    <script src="/SPCPTest/Web/Scripts/layer/layer.js"></script><link rel="stylesheet" href="http://xgsys.swjtu.edu.cn/SPCPTest/Web/Scripts/layer/theme/default/layer.css?v=3.1.1" id="layuicss-layer"> 
+    <title>西南交通大学-疫情防控管理平台</title>
+</head>
+<body>
+    
+
+<div class="logo">
+    <img src="/SPCPTest/Web/Content/img/logo.png?dt=20200506">
+</div>
+<div class="login_bg">
+    <h1>
+        <label>返校申请信息查看</label>
+    </h1>
+    <div class="Login_list">
+        <p>
+            刘凯：
+        </p>
+        <p style="margin-top:10px; text-indent:30px;">
+                    </p><pre>你的返校申请正在审核中。</pre>
+        <p></p>
+
+        <div class="track-rcol">
+            <div class="track-list">
+                <ul>
+                                <li>
+                                    <i class="node-icon"></i>
+                                    <span class="time">2020-05-13</span>
+                                    <span class="txt">【学生】- 刘凯(2017200413)发起申请</span>
+                                </li>
+                                <li class="first">
+                                    <i class="node-icon"></i>
+                                    <span class="time">等待【辅导员】审核</span>
+                                    <span class="txt">&nbsp;</span>
+                                </li>
+                                <li class="">
+                                    <i class="node-icon"></i>
+                                    <span class="time">等待【学院】审核</span>
+                                    <span class="txt">&nbsp;</span>
+                                </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="btn_div">
+                <a id="turn_edit" href="/SPCPTest/Web/BackSchool/Register">信息变更</a>
+
+    </div>
+</div>
+<link href="/SPCPTest/Web/Content/css/RegisterInfo.css?v=202002240941" rel="stylesheet">
+
+        <link href="/SPCPTest/Web/Content/css/menustyle.css" rel="stylesheet">
+        <script src="/SPCPTest/Web/Scripts/menu.js"></script>
+        <div id="cd-nav" class="is-fixed">
+            <a href="javascript:void(0)" class="cd-nav-trigger"><span></span></a>
+            <nav id="cd-main-nav">
+                <ul>
+                    <li>
+                        <a href="/SPCPTest/Web/Account/ChooseSys">
+                            <img src="/SPCPTest/Web/Content/img/icon1.png"> 首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/SPCPTest/Web/Account/Logout">
+                            <img src="/SPCPTest/Web/Content/img/icon3.png"> 退出
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+</body></html>

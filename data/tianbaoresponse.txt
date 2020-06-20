@@ -1,0 +1,13 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
+    <title>西南交通大学信息提示页</title>
+    <script src="/SPCPTest/Web/Scripts/jquery-2.1.4.min.js"></script>
+    <link href="/SPCPTest/Web/Scripts/layer/mobile/need/layer.css" rel="stylesheet">
+    <script src="/SPCPTest/Web/Scripts/layer/mobile/layer.js"></script><link href="http://xgsys.swjtu.edu.cn/SPCPTest/Web/Scripts/layer/mobile/need/layer.css?2.0" type="text/css" rel="styleSheet" id="layermcss">
+</head>
+<body>
+    <script type="text/javascript">layer.open({shadeClose:false,content: '当前采集日期已登记！', btn: '确定' , yes: function(index){window.location.href = '/SPCPTest/Web/Account/ChooseSys'}});</script><div id="layui-m-layer0" class="layui-m-layer layui-m-layer0" index="0"><div class="layui-m-layershade"></div><div class="layui-m-layermain"><div class="layui-m-layersection"><div class="layui-m-layerchild  layui-m-anim-scale"><div class="layui-m-layercont">当前采集日期已登记！</div><div class="layui-m-layerbtn"><span yes="" type="1">确定</span></div></div></div></div></div>
+
+ </body></html>
